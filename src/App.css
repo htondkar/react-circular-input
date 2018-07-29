@@ -1,0 +1,35 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.marker {
+  height: 5px;
+  width: 5px;
+  background: red;
+  z-index: 1;
+  position: fixed;
+}
+
+.circular-input {
+  position: relative;
+}
+
+.circular-input__value {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circular-input__track {
+  fill: red;
+}
