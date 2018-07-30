@@ -1,9 +1,14 @@
+:root {
+  --background: #333;
+}
+
 .app {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--background);
 }
 
 .marker {
@@ -24,10 +29,20 @@
   right: 0;
   top: 0;
   bottom: 0;
+  font-size: 2rem;
+  color: palevioletred;
+  text-shadow: 0 0 5px palevioletred;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans',
+    Arial, sans-serif;
 
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.circular-input__value__wrapper {
+  padding: 5px;
+  background: var(--background);
 }
 
 .circular-input__track {
