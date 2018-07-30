@@ -9,6 +9,7 @@
   justify-content: center;
   align-items: center;
   background: var(--background);
+  cursor: pointer;
 }
 
 .marker {
