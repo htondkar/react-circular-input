@@ -7,11 +7,10 @@ export default class CircularMouseTracker extends React.Component {
   tracking = false
 
   state = {
-    degree: 0,
+    degree: this.props.initialValue || 0,
   }
 
   componentDidMount() {
-    window.addEventListener('mousedown', this.handleMouseDown)
     window.addEventListener('mouseup', this.handleMouseUp)
     window.addEventListener('mousemove', this.handleMouseMove)
     window.addEventListener('click', this.handleClick)
@@ -22,10 +21,9 @@ export default class CircularMouseTracker extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('click', this.handleClick)
-    window.removeEventListener('mousedown', this.handleMouseDown)
     window.removeEventListener('mouseup', this.handleMouseUp)
     window.removeEventListener('mousemove', this.handleMouseMove)
+    window.removeEventListener('click', this.handleClick)
     window.removeEventListener('resize', this.calculateCenterOfSelf)
   }
 
@@ -40,6 +38,8 @@ export default class CircularMouseTracker extends React.Component {
   }
 
   handleClick = event => {
+    if (!this.wrapper.current.contains(event.target)) return
+
     this.tracking = true
     this.handleMouseMove(event)
     this.tracking = false
@@ -56,6 +56,8 @@ export default class CircularMouseTracker extends React.Component {
     const correspondingDegree = this.calculateDegree(deltaX, deltaY)
 
     this.setState({ degree: correspondingDegree })
+
+    if (this.props.onChange) this.props.onChange(correspondingDegree)
   }
 
   calculateDegree = (dX, dY) => {
@@ -81,7 +83,7 @@ export default class CircularMouseTracker extends React.Component {
   render() {
     return (
       <div className="wrapper" ref={this.wrapper}>
-        {this.props.children(this.state.degree)}
+        {this.props.children(this.state.degree, this.handleMouseDown)}
       </div>
     )
   }
